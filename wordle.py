@@ -120,7 +120,7 @@ def prepare_game():
 
     with open("valid_guesses.txt", "r", encoding="ascii") as valid_nonsecret_words:
         valid_words = [word.rstrip() for word in valid_nonsecret_words.readlines()]
-    
+
     with open("secret_words.txt", "r", encoding = "ascii") as valid_secret_words :
         secret_words = [word.rstrip() for word in valid_secret_words.readlines()]
 
@@ -153,8 +153,6 @@ def is_valid_guess(guess, valid_guesses):
 
     return b
 
-
-# TODO: Modify this function. You may delete this comment when you are done.
 def get_feedback(secret_word, guessed_word):
     """
     Processes the guess and generates the colored feedback based on the secret
@@ -174,11 +172,25 @@ def get_feedback(secret_word, guessed_word):
     """
     feedback = [None] * NUM_LETTERS
 
-    # Modify this! This is just starter code.
-    for i in range(NUM_LETTERS):
-        feedback[i] = WRONG_SPOT_COLOR
+    d = {}
+    for char in guessed_word :
+        d[char] = 0
 
-    # You do not have to change this return statement
+    for i in range(NUM_LETTERS) :
+        if secret_word[i] == guessed_word[i] :
+            feedback[i] = CORRECT_COLOR
+            d[guessed_word[i]] += 1
+
+    for i in range(NUM_LETTERS):
+        if secret_word[i] == guessed_word[i] :
+            continue
+        if secret_word.count(guessed_word[i]) > d[guessed_word[i]] \
+            and secret_word.count(guessed_word[i]) != 0:
+            feedback[i] = WRONG_SPOT_COLOR
+            d[guessed_word[i]] += 1
+        else :
+            feedback[i] = NOT_IN_WORD_COLOR
+
     return color_word(feedback, guessed_word)
 
 

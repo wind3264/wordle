@@ -144,7 +144,7 @@ class TestGetFeedback(unittest.TestCase):
         self.assertEqual(actual, expected)
 
     def test_9(self):
-        """get_feedback(): secret word table and guessed word metal"""
+        """get_feedback(): secret word index and guessed word linen"""
         secret_word = "index"
         guessed_word = "linen"
         actual = get_feedback(secret_word, guessed_word)
