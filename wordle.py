@@ -127,6 +127,7 @@ def prepare_game():
     if len(sys.argv) == 2 :
         if len(sys.argv[1]) == 5 and sys.argv[1].isalpha() and sys.argv[1].islower() :
             secret_word = sys.argv[1]
+            valid_words.append(secret_word)
         elif sys.argv[1].isdigit() :
             random.seed(int(sys.argv[1]))
             secret_word = random.choice(secret_words)
@@ -135,7 +136,7 @@ def prepare_game():
     else :
         raise ValueError
 
-    return (secret_word, valid_words)
+    return secret_word, valid_words
 
 def is_valid_guess(guess, valid_guesses):
     """
